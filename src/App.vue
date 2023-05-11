@@ -1,19 +1,16 @@
 <script setup>
-
+import {ref} from 'vue'
+let todos = ref (['A','B','C'])
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <h1>My Todo Application</h1>
+<ol>
+  <li v-for="todo in todos">
+    {{ todo }}
+  </li>
+</ol>
 </template>
 
 <style scoped>

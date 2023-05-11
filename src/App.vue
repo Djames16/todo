@@ -2,9 +2,13 @@
 import {ref} from 'vue'
 let todos = ref (['A','B','C'])
 let newTodo = ref('')
+function AddTodo(){
+  alert(newTodo.value)
+}
 </script>
 
 <template>
+   
 
   <h1>My Todo Application</h1>
 <ol>
@@ -14,7 +18,7 @@ let newTodo = ref('')
 </ol>
 
 <input v-model="newTodo">
-<button> Add Todo</button>
+<button @click="AddTodo"> Add Todo</button>
 </template>
 
 <style scoped>

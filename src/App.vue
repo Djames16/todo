@@ -1,6 +1,7 @@
 <script setup>
 import {ref} from 'vue'
 let todos = ref (['A','B','C'])
+let newTodo = ref('')
 </script>
 
 <template>
@@ -11,6 +12,9 @@ let todos = ref (['A','B','C'])
     {{ todo }}
   </li>
 </ol>
+
+<input v-model="newTodo">
+<button> Add Todo</button>
 </template>
 
 <style scoped>
@@ -39,5 +43,12 @@ header {
     place-items: flex-start;
     flex-wrap: wrap;
   }
+}
+body  {
+    background: rgb(88,50,108);
+background: linear-gradient(117deg, rgb(244, 194, 194) 0%, rgb(137,207,240) 100%);
+font-family: 'Bruno Ace SC', cursive;
+    text-align: center;
+    min-height: 100vh;
 }
 </style>

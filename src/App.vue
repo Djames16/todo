@@ -3,7 +3,10 @@ import {ref} from 'vue'
 let todos = ref ([])
 let newTodo = ref('')
 function AddTodo(){
-  todos.value.push(newTodo.value)
+  todos.value.push({
+    text: newTodo.value,
+    complete: false
+  })
 
   newTodo.value =""
 }
@@ -18,8 +21,9 @@ function deleteTodo(index){
   <h1>My Todo Application</h1>
 <ol>
   <li v-for="(todo, index) in todos">
+    <input type="checkbox" v-model="todo.complete">
     <button @click="deleteTodo(index)">🚮</button>
-    {{ todo }}
+    {{ todo.text }}
   </li>
 </ol>
 

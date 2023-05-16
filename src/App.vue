@@ -1,6 +1,6 @@
 <script setup>
 import {ref, watch} from 'vue'
-let todos = ref (JSON.parse(window.localStorage.getItem('todos')))
+let todos = ref (JSON.parse(window.localStorage.getItem('todos'))??[])
 let newTodo = ref('')
 watch(todos, function(value){
   window.localStorage.setItem('todos', JSON.stringify(value))
@@ -26,7 +26,9 @@ function deleteTodo(index){
   <li v-for="(todo, index) in todos">
     <input type="checkbox" v-model="todo.complete">
     <button @click="deleteTodo(index)">🚮</button>
+    <span :class="{completed: todo.complete}">
     {{ todo.text }}
+    </span>
   </li>
 </ol>
 
@@ -48,7 +50,7 @@ input[type="checkbox"]{
   -webkit-appearance: none;
   height: 20px;
   width:20px;
-  background-color: #d5d5d5;
+  background-color: black;
   cursor:pointer;
   display:inline-flex;
   align-items: center;
@@ -57,21 +59,27 @@ input[type="checkbox"]{
 
 input[type="checkbox"]:after{
   font-family: "Font Awesome 5 Free";
+  content: "\f00c";
   font-weight: 900;
-  content:"\f00c";
   font-size:20px;
-  color: (244, 194, 194);
+  color: rgb(137,207,240);
   display:none
 }
 input[type="checkbox"]:hover{
-  background-color: blanchedalmond;
+  background-color: rgb(137,207,240);
 }
 
 input[type="checkbox"]:checked{
-  background-color: aquamarine;
+  background-color:  rgb(244, 194, 194);
+  height: 20px;
+  width:20px;
 }
 
 input[type="checkbox"]:checked::after{
   display: block;
+}
+.completed {
+  text-decoration: line-through;
+  color: black;
 }
 </style>

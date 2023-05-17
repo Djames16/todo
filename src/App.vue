@@ -2,9 +2,21 @@
 import {ref, watch} from 'vue'
 let todos = ref (JSON.parse(window.localStorage.getItem('todos'))??[])
 let newTodo = ref('')
+let filter =ref('all')
 watch(todos, function(value){
   window.localStorage.setItem('todos', JSON.stringify(value))
   }, {deep: true})
+
+  function todoFilter (todo){
+     if(filter.value=='active') {
+      return todo.complete == false;
+    } else if (filter.value=='completed') {
+      return todo.complete==true;
+    } else {
+      return true
+    }
+  }
+
 function AddTodo(){
   todos.value.push({
     text: newTodo.value,
@@ -23,7 +35,7 @@ function deleteTodo(index){
 
   <h1>My Todo Application</h1>
 <ol>
-  <li v-for="(todo, index) in todos">
+  <li v-for="(todo, index) in todos.filter(todoFilter)">
     <input type="checkbox" v-model="todo.complete">
     <button @click="deleteTodo(index)">🚮</button>
     <span :class="{completed: todo.complete}">
@@ -33,7 +45,13 @@ function deleteTodo(index){
 </ol>
 
 <input v-model="newTodo" @keydown.enter="AddTodo">
-<button @click="AddTodo"> Add Todo</button>
+<button  @click="AddTodo"> Add Todo</button>
+<input name="filter" type="radio" value="all" v-model="filter">
+<label>All</label>
+<input name="filter" type="radio" value="active" v-model="filter">
+<label>Active</label>
+<input name="filter" type="radio" value="completed" v-model="filter">
+<label>Completed</label>
 </template>
 
 <style>
@@ -82,4 +100,5 @@ input[type="checkbox"]:checked::after{
   text-decoration: line-through;
   color: black;
 }
+
 </style>

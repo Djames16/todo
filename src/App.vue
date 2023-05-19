@@ -36,7 +36,7 @@ function deleteTodo(index) {
 <template>
   <h1>My Todo Application</h1>
   <p>{{ todos.filter(activeFilter).length }} items left</p>
-  <input placeholder="Add new Todo" v-model="newTodo" @keydown.enter="addTodo">
+  <input id="newtodo" placeholder="Add new Todo" v-model="newTodo" @keydown.enter="addTodo">
   <button @click="addTodo"> Add Todo</button>
   <p v-if="todos.length > 0">
 
@@ -53,10 +53,11 @@ function deleteTodo(index) {
   </p>
   <ol>
     <li v-for="(todo, index) in todos.filter(todoFilter)">
+
       <input type="checkbox" v-model="todo.complete">
       <button @click="deleteTodo(index)">🚮</button>
-      <span :class="{ completed: todo.complete }">
-        {{ todo.text }}
+      <span  :class="{ completed: todo.complete }">
+        {{ todo.text }}  
       </span>
     </li>
   </ol>
@@ -80,7 +81,7 @@ input[type="checkbox"] {
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  justify-content: center
+  justify-content: center;
 }
 
 input[type="checkbox"]:after {
@@ -89,7 +90,7 @@ input[type="checkbox"]:after {
   font-weight: 900;
   font-size: 20px;
   color: rgb(137, 207, 240);
-  display: none
+  display: none 
 }
 
 input[type="checkbox"]:hover {
@@ -109,5 +110,11 @@ input[type="checkbox"]:checked::after {
 .completed {
   text-decoration: line-through;
   color: black;
+}
+
+li {
+  padding: 12px; 
+  box-shadow: 5px 10px purple;
+  border: 1px solid;
 }
 </style>
